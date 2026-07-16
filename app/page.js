@@ -5,7 +5,10 @@ import {
   ArrowUpRight,
   Check,
   Menu,
+  Minus,
+  Plus,
   ShoppingBag,
+  Trash2,
   X,
 } from "lucide-react";
 import { useEffect, useState } from "react";
@@ -13,79 +16,100 @@ import { useEffect, useState } from "react";
 const products = [
   {
     id: "chair",
-    name: "Кресло Sarek",
-    material: "Массив дуба, шерсть",
-    price: "89 000 ₽",
+    name: "CH24 Wishbone",
+    brand: "Carl Hansen & Søn",
+    material: "Дуб, плетёный бумажный шнур",
+    price: 118000,
     category: "Кресла",
-    image: "https://loremflickr.com/800/1000/chair,furniture",
-    fallback: "images/product-1.jpg",
+    image: "images/premium-chair.jpg",
+    width: 1200,
+    height: 1707,
+    fit: "contain",
   },
   {
     id: "sofa",
-    name: "Диван Fjord",
-    material: "Лён, пух, ясень",
-    price: "198 000 ₽",
+    name: "Outline Sofa",
+    brand: "Muuto",
+    material: "Шерсть Divina, алюминий",
+    price: 349000,
     category: "Диваны",
-    image: "https://loremflickr.com/800/1000/sofa,interior",
-    fallback: "images/product-2.jpg",
+    image: "images/premium-sofa.jpg",
+    width: 1000,
+    height: 563,
+    fit: "contain",
   },
   {
     id: "light",
-    name: "Светильник Lysa",
-    material: "Матовая латунь",
-    price: "42 000 ₽",
+    name: "PH 5 Pendant",
+    brand: "Louis Poulsen",
+    material: "Формованный алюминий",
+    price: 112000,
     category: "Свет",
-    image: "https://loremflickr.com/800/1000/lamp,interior",
-    fallback: "images/product-3.jpg",
+    image: "images/premium-lamp.jpg",
+    width: 600,
+    height: 600,
+    fit: "contain",
   },
   {
     id: "table",
-    name: "Стол Runa",
-    material: "Дымчатый дуб",
-    price: "124 000 ₽",
+    name: "Androgyne Dining",
+    brand: "Audo Copenhagen",
+    material: "Маслёный дуб, камень",
+    price: 390000,
     category: "Столы",
-    image: "https://loremflickr.com/800/1000/wooden,table",
-    fallback: "images/product-4.jpg",
+    image: "images/premium-table.jpg",
+    width: 1275,
+    height: 1700,
   },
   {
     id: "sideboard",
-    name: "Комод Skog",
-    material: "Дуб, натуральное масло",
-    price: "96 000 ₽",
+    name: "Haller M51",
+    brand: "USM",
+    material: "Сталь, хромированные трубы",
+    price: 218000,
     category: "Хранение",
-    image: "https://loremflickr.com/800/1000/wooden,cabinet",
-    fallback: "images/product-5.jpg",
+    image: "images/premium-sideboard.jpg",
+    width: 2000,
+    height: 2000,
+    fit: "contain",
   },
   {
     id: "rug",
-    name: "Ковёр Mossa",
-    material: "Шерсть ручной работы",
-    price: "54 000 ₽",
+    name: "Park Gray",
+    brand: "Nordic Knots",
+    material: "Новозеландская шерсть",
+    price: 165000,
     category: "Текстиль",
-    image: "https://loremflickr.com/800/1000/wool,rug",
-    fallback: "images/product-6.jpg",
+    image: "images/premium-rug.jpg",
+    width: 480,
+    height: 600,
   },
 ];
 
-const handleImageError = ({ currentTarget }, fallback) => {
-  currentTarget.onerror = null;
-  currentTarget.src = fallback;
-};
+const formatPrice = (value) => `${new Intl.NumberFormat("ru-RU").format(value)} ₽`;
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [cartCount, setCartCount] = useState(0);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartItems, setCartItems] = useState([]);
   const [addedItem, setAddedItem] = useState(null);
+  const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
+  const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
   useEffect(() => {
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
+        setCartOpen(false);
       }
     };
+    document.body.style.overflow = cartOpen ? "hidden" : "";
     window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
-  }, []);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [cartOpen]);
 
   const scrollTo = (id) => {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
@@ -93,9 +117,37 @@ export default function Home() {
   };
 
   const addToCart = (item) => {
-    setCartCount((count) => count + 1);
+    setCartItems((current) => {
+      const existing = current.find((cartItem) => cartItem.id === item.id);
+      return existing
+        ? current.map((cartItem) =>
+            cartItem.id === item.id
+              ? { ...cartItem, quantity: cartItem.quantity + 1 }
+              : cartItem,
+          )
+        : [...current, { ...item, quantity: 1 }];
+    });
     setAddedItem(item.id);
     window.setTimeout(() => setAddedItem(null), 1600);
+  };
+
+  const updateQuantity = (id, change) => {
+    setCartItems((current) =>
+      current
+        .map((item) => (item.id === id ? { ...item, quantity: item.quantity + change } : item))
+        .filter((item) => item.quantity > 0),
+    );
+  };
+
+  const removeFromCart = (id) => {
+    setCartItems((current) => current.filter((item) => item.id !== id));
+  };
+
+  const checkout = () => {
+    const order = cartItems
+      .map((item) => `${item.name} — ${item.quantity} шт.`)
+      .join("\n");
+    window.location.href = `mailto:hello@nordic-home.ru?subject=${encodeURIComponent("Заказ NORDIC")}&body=${encodeURIComponent(`${order}\n\nИтого: ${formatPrice(cartTotal)}`)}`;
   };
 
   return (
@@ -120,7 +172,14 @@ export default function Home() {
         </nav>
 
         <section className="header-actions" aria-label="Действия">
-          <button className="cart-button" type="button" aria-label={`Корзина: ${cartCount} товаров`}>
+          <button
+            className="cart-button"
+            type="button"
+            onClick={() => setCartOpen(true)}
+            aria-expanded={cartOpen}
+            aria-controls="cart-drawer"
+            aria-label={`Открыть корзину: ${cartCount} товаров`}
+          >
             <ShoppingBag size={18} strokeWidth={1.7} />
             <span>{cartCount}</span>
           </button>
@@ -135,6 +194,80 @@ export default function Home() {
           </button>
         </section>
       </header>
+
+      <button
+        className={cartOpen ? "cart-backdrop is-visible" : "cart-backdrop"}
+        type="button"
+        onClick={() => setCartOpen(false)}
+        aria-label="Закрыть корзину"
+        tabIndex={cartOpen ? 0 : -1}
+      />
+      <aside
+        id="cart-drawer"
+        className={cartOpen ? "cart-drawer is-open" : "cart-drawer"}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!cartOpen}
+        aria-labelledby="cart-title"
+      >
+        <header className="cart-drawer-header">
+          <section>
+            <p className="eyebrow">Ваш выбор</p>
+            <h2 id="cart-title">Корзина <span>{cartCount}</span></h2>
+          </section>
+          <button type="button" onClick={() => setCartOpen(false)} aria-label="Закрыть корзину">
+            <X size={20} />
+          </button>
+        </header>
+
+        {cartItems.length ? (
+          <section className="cart-list" aria-label="Товары в корзине">
+            {cartItems.map((item) => (
+              <article className="cart-item" key={item.id}>
+                <figure>
+                  <img src={item.image} alt="" width={item.width} height={item.height} />
+                </figure>
+                <section>
+                  <p>{item.brand}</p>
+                  <h3>{item.name}</h3>
+                  <strong>{formatPrice(item.price)}</strong>
+                  <footer>
+                    <section className="quantity-control" aria-label={`Количество: ${item.quantity}`}>
+                      <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label="Уменьшить количество">
+                        <Minus size={14} />
+                      </button>
+                      <span>{item.quantity}</span>
+                      <button type="button" onClick={() => updateQuantity(item.id, 1)} aria-label="Увеличить количество">
+                        <Plus size={14} />
+                      </button>
+                    </section>
+                    <button className="remove-item" type="button" onClick={() => removeFromCart(item.id)} aria-label={`Удалить ${item.name}`}>
+                      <Trash2 size={15} />
+                    </button>
+                  </footer>
+                </section>
+              </article>
+            ))}
+          </section>
+        ) : (
+          <section className="empty-cart">
+            <ShoppingBag size={28} strokeWidth={1.3} />
+            <h3>Корзина пока пуста</h3>
+            <p>Добавьте предметы из&nbsp;каталога — они появятся здесь.</p>
+            <button type="button" onClick={() => { setCartOpen(false); scrollTo("catalog"); }}>
+              Перейти в&nbsp;каталог
+            </button>
+          </section>
+        )}
+
+        <footer className="cart-summary">
+          <p><span>Итого</span><strong>{formatPrice(cartTotal)}</strong></p>
+          <button type="button" onClick={checkout} disabled={!cartItems.length}>
+            Оформить заказ <ArrowUpRight size={17} />
+          </button>
+          <small>Доставка рассчитывается после подтверждения заказа.</small>
+        </footer>
+      </aside>
 
       <main id="home">
         <section className="hero" aria-labelledby="hero-title">
@@ -191,10 +324,10 @@ export default function Home() {
                   <img
                     src={item.image}
                     alt={item.name}
-                    width="800"
-                    height="1000"
+                    width={item.width}
+                    height={item.height}
                     loading="lazy"
-                    onError={(event) => handleImageError(event, item.fallback)}
+                    className={item.fit === "contain" ? "is-contained" : ""}
                   />
                   <figcaption>
                     <span>{item.category}</span>
@@ -202,11 +335,11 @@ export default function Home() {
                   </figcaption>
                 </figure>
                 <header>
-                  <p>{item.material}</p>
+                  <p>{item.brand} · {item.material}</p>
                   <h3>{item.name}</h3>
                 </header>
                 <footer>
-                  <strong>{item.price}</strong>
+                  <strong>{formatPrice(item.price)}</strong>
                   <button type="button" onClick={() => addToCart(item)}>
                     {addedItem === item.id ? (
                       <>Добавлено <Check size={15} /></>
