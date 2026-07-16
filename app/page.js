@@ -145,15 +145,6 @@ export default function Home() {
   return (
     <>
       <header className="site-header">
-        <button
-          className="wordmark"
-          type="button"
-          onClick={() => scrollTo("home")}
-          aria-label="В начало страницы"
-        >
-          NORDIC
-        </button>
-
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
           <button type="button" onClick={() => scrollTo("catalog")}>
             Каталог
@@ -263,29 +254,14 @@ export default function Home() {
 
       <main id="home">
         <section className="hero" aria-labelledby="hero-title">
-          <figure className="hero-visual">
-            <img
-              src="images/premium-table.jpg"
-              alt="Столовая Audo Copenhagen со скульптурным столом из дуба и камня"
-              width="1275"
-              height="1700"
-              fetchPriority="high"
-            />
-            <figcaption>
-              <span>Audo Copenhagen</span>
-              <span>Androgyne · 2026</span>
-            </figcaption>
-          </figure>
-          <aside className="hero-edition" aria-label="Сведения о коллекции">
-            <span>Редакция 01</span>
-            <strong>06</strong>
-            <small>икон дизайна</small>
-          </aside>
           <article className="hero-copy">
-            <p className="eyebrow">Копенгаген · Стокгольм</p>
+            <header className="hero-kicker">
+              <p className="eyebrow">Scandinavian design house</p>
+              <span>Est. 2026 · Москва</span>
+            </header>
             <h1 id="hero-title">
-              NORDIC.
-              <span>Тишина, принявшая форму.</span>
+              <span className="hero-brand">NORDIC</span>
+              <span className="hero-tagline">Тишина, принявшая форму.</span>
             </h1>
             <footer className="hero-footer">
               <p>
