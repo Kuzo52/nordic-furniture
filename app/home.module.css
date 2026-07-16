@@ -1,7 +1,6 @@
 .editorial,
 .categories,
-.designer,
-.services {
+.designer {
   padding: 2.5rem 1.25rem;
 }
 
@@ -106,8 +105,9 @@
 }
 
 .categories {
-  background: var(--charcoal);
-  color: var(--linen);
+  border-bottom: 1px solid var(--line);
+  background: var(--linen);
+  color: var(--charcoal);
 }
 
 .sectionIntro {
@@ -116,12 +116,12 @@
 }
 
 .sectionIntro > p:last-child {
-  color: rgba(245, 242, 235, 0.62);
+  color: rgba(30, 30, 30, 0.62);
 }
 
 .categoryGrid {
   display: grid;
-  gap: 1rem;
+  border-top: 1px solid var(--line);
 }
 
 .categoryCard {
@@ -129,46 +129,45 @@
   text-decoration: none;
 }
 
-.categoryCard figure {
-  position: relative;
-  margin: 0;
-  overflow: hidden;
-  border-radius: 20px;
-  background: #292a28;
-}
-
-.categoryCard img {
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  object-fit: cover;
-  opacity: 0.8;
-  transition: transform 900ms var(--ease), opacity 600ms var(--ease);
-}
-
-.categoryCard:hover img {
-  opacity: 0.95;
-  transform: scale(1.035);
-}
-
-.categoryCard figcaption {
-  position: absolute;
-  inset: auto 1.25rem 1.25rem;
+.categoryCard article {
   display: grid;
-  gap: 0.35rem;
-  text-shadow: 0 0.25rem 1rem rgba(0, 0, 0, 0.3);
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 0.45rem 1rem;
+  min-height: 9rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--line);
+  transition: padding 500ms var(--ease), color 350ms var(--ease);
 }
 
-.categoryCard figcaption span,
-.categoryCard figcaption small {
+.categoryCard:hover article {
+  padding-right: 0.75rem;
+  padding-left: 0.75rem;
+  color: var(--sage);
+}
+
+.categoryCard span,
+.categoryCard small {
   font-size: 0.64rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-.categoryCard figcaption strong {
+.categoryCard strong {
+  grid-column: 1;
   font-family: var(--serif);
   font-size: clamp(2rem, 4vw, 3.5rem);
   font-weight: 400;
+}
+
+.categoryCard small {
+  grid-column: 1;
+  color: rgba(30, 30, 30, 0.55);
+}
+
+.categoryCard svg {
+  grid-column: 2;
+  grid-row: 1 / span 3;
 }
 
 .catalogFooter {
@@ -188,14 +187,14 @@
 }
 
 .designer {
-  display: grid;
-  gap: 2rem;
-  color: var(--linen);
-  background: var(--sage);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--charcoal);
+  background: #e9e3d8;
 }
 
 .designer article {
-  align-self: center;
+  display: grid;
 }
 
 .designer h2 {
@@ -205,63 +204,17 @@
 .designer blockquote {
   max-width: 32rem;
   margin: 2rem 0;
-  color: rgba(245, 242, 235, 0.72);
+  color: rgba(30, 30, 30, 0.64);
   font-family: var(--serif);
   font-size: clamp(1.25rem, 2vw, 1.7rem);
   font-style: italic;
   line-height: 1.4;
 }
 
-.designer figure {
-  margin: 0;
-  overflow: hidden;
-  border-radius: 20px;
-}
-
-.designer img {
-  width: 100%;
-  aspect-ratio: 14 / 11;
-  object-fit: cover;
-  filter: saturate(0.72);
-}
-
-.services {
-  display: grid;
-  gap: 1px;
-  padding-top: 0;
-  background: var(--line);
-}
-
-.services article {
-  padding: 2rem 0;
-  background: var(--linen);
-}
-
-.services span {
-  color: var(--sage);
-  font-size: 0.65rem;
-  font-weight: 700;
-}
-
-.services h2 {
-  margin: 1rem 0 0.5rem;
-  font-family: var(--serif);
-  font-size: 1.65rem;
-  font-weight: 400;
-}
-
-.services p {
-  max-width: 24rem;
-  margin: 0;
-  color: rgba(30, 30, 30, 0.62);
-  line-height: 1.55;
-}
-
 @media (min-width: 768px) {
   .editorial,
   .categories,
-  .designer,
-  .services {
+  .designer {
     padding: 6rem 3rem;
   }
 
@@ -287,24 +240,41 @@
 
   .categoryGrid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 1.25rem;
   }
 
-  .categoryCard:nth-child(2) {
-    padding-top: 3rem;
+  .categoryCard article {
+    min-height: 13rem;
+    padding: 1.5rem;
+    border-right: 1px solid var(--line);
   }
 
-  .designer {
-    grid-template-columns: minmax(18rem, 0.8fr) minmax(0, 1.4fr);
-    gap: 4rem;
+  .categoryCard:last-child article {
+    border-right: 0;
   }
 
-  .services {
-    grid-template-columns: repeat(3, 1fr);
-    padding-top: 0;
+  .designer article {
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: start;
+    gap: 3rem;
   }
 
-  .services article {
-    padding: 3rem;
+  .designer h2,
+  .designer blockquote {
+    grid-column: 2;
+  }
+
+  .designer h2 {
+    margin-top: 0;
+  }
+
+  .designer blockquote {
+    margin: 1rem 0 0;
+  }
+
+  .designer a {
+    grid-column: 3;
+    grid-row: 2;
+    align-self: end;
+    justify-self: start;
   }
 }

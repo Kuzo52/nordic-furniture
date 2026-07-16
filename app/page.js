@@ -11,19 +11,16 @@ const categories = [
     key: "living",
     title: "Гостиная",
     note: "Кресла, диваны и хранение",
-    image: "https://loremflickr.com/1200/1500/scandinavian-living-room",
   },
   {
     key: "dining",
     title: "Столовая",
     note: "Столы и стулья",
-    image: "https://loremflickr.com/1200/1500/scandinavian-dining-room",
   },
   {
     key: "lighting",
     title: "Свет",
     note: "Подвесные и настольные лампы",
-    image: "https://loremflickr.com/1200/1500/scandinavian-lighting",
   },
 ];
 
@@ -105,20 +102,12 @@ export default function Home() {
               href={`/catalog/?category=${category.key}`}
               className={styles.categoryCard}
             >
-              <figure>
-                <SafeImage
-                  src={category.image}
-                  alt=""
-                  width="1200"
-                  height="1500"
-                  loading="lazy"
-                />
-                <figcaption>
-                  <span>0{index + 1}</span>
-                  <strong>{category.title}</strong>
-                  <small>{category.note}</small>
-                </figcaption>
-              </figure>
+              <article>
+                <span>0{index + 1}</span>
+                <strong>{category.title}</strong>
+                <small>{category.note}</small>
+                <ArrowRight size={20} />
+              </article>
             </Link>
           ))}
         </section>
@@ -156,15 +145,6 @@ export default function Home() {
             История кресла CH24 <ArrowRight size={18} />
           </Link>
         </article>
-        <figure>
-          <SafeImage
-            src="https://loremflickr.com/1400/1100/furniture-craftsman"
-            alt="Мастер работает с деревянной деталью мебели"
-            width="1400"
-            height="1100"
-            loading="lazy"
-          />
-        </figure>
       </Reveal>
 
       <Reveal
@@ -186,23 +166,6 @@ export default function Home() {
         </article>
       </Reveal>
 
-      <Reveal className={styles.services} aria-label="Сервис NORDIC">
-        <article>
-          <span>01</span>
-          <h2>Доставка с&nbsp;подъёмом</h2>
-          <p>Москва и&nbsp;область — от&nbsp;двух рабочих дней.</p>
-        </article>
-        <article>
-          <span>02</span>
-          <h2>Подбор для интерьера</h2>
-          <p>Соберём спокойный комплект по&nbsp;плану вашей комнаты.</p>
-        </article>
-        <article>
-          <span>03</span>
-          <h2>Гарантия и&nbsp;уход</h2>
-          <p>Поддерживаем предметы после покупки, а&nbsp;не&nbsp;только до&nbsp;неё.</p>
-        </article>
-      </Reveal>
     </main>
   );
 }
