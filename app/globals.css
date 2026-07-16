@@ -619,12 +619,6 @@ img {
   transition: transform 1s var(--ease), filter 600ms var(--ease);
 }
 
-.product-card img.is-contained {
-  padding: 1.25rem;
-  object-fit: contain;
-  background: #e9e5dc;
-}
-
 .product-card:hover img {
   filter: saturate(0.88);
   transform: scale(1.035);
@@ -939,6 +933,18 @@ img {
 }
 
 @media (max-width: 767px) {
+  .cart-button {
+    position: fixed;
+    z-index: 60;
+    right: max(1rem, env(safe-area-inset-right));
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    width: 3.5rem;
+    height: 3.5rem;
+    border-color: rgba(255, 255, 255, 0.25);
+    background: var(--sage);
+    box-shadow: 0 1rem 2.5rem rgba(30, 30, 30, 0.22);
+  }
+
   .main-nav {
     position: absolute;
     top: calc(4.25rem + env(safe-area-inset-top));

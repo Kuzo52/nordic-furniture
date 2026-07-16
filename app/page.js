@@ -23,8 +23,7 @@ const products = [
     category: "Кресла",
     image: "images/premium-chair.jpg",
     width: 1200,
-    height: 1707,
-    fit: "contain",
+    height: 1600,
   },
   {
     id: "sofa",
@@ -36,7 +35,6 @@ const products = [
     image: "images/premium-sofa.jpg",
     width: 1000,
     height: 563,
-    fit: "contain",
   },
   {
     id: "light",
@@ -48,7 +46,6 @@ const products = [
     image: "images/premium-lamp.jpg",
     width: 600,
     height: 600,
-    fit: "contain",
   },
   {
     id: "table",
@@ -71,7 +68,6 @@ const products = [
     image: "images/premium-sideboard.jpg",
     width: 2000,
     height: 2000,
-    fit: "contain",
   },
   {
     id: "rug",
@@ -81,8 +77,8 @@ const products = [
     price: 165000,
     category: "Текстиль",
     image: "images/premium-rug.jpg",
-    width: 480,
-    height: 600,
+    width: 900,
+    height: 1125,
   },
 ];
 
@@ -328,7 +324,6 @@ export default function Home() {
                     width={item.width}
                     height={item.height}
                     loading="lazy"
-                    className={item.fit === "contain" ? "is-contained" : ""}
                   />
                   <figcaption>
                     <span>{item.category}</span>
