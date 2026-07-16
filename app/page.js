@@ -17,7 +17,8 @@ const products = [
     material: "Массив дуба, шерсть",
     price: "89 000 ₽",
     category: "Кресла",
-    image: "https://loremflickr.com/800/1000/scandinavian-chair",
+    image: "https://loremflickr.com/800/1000/chair,furniture",
+    fallback: "images/product-1.jpg",
   },
   {
     id: "sofa",
@@ -25,7 +26,8 @@ const products = [
     material: "Лён, пух, ясень",
     price: "198 000 ₽",
     category: "Диваны",
-    image: "https://loremflickr.com/800/1000/scandinavian-sofa",
+    image: "https://loremflickr.com/800/1000/sofa,interior",
+    fallback: "images/product-2.jpg",
   },
   {
     id: "light",
@@ -33,7 +35,8 @@ const products = [
     material: "Матовая латунь",
     price: "42 000 ₽",
     category: "Свет",
-    image: "https://loremflickr.com/800/1000/pendant-lamp",
+    image: "https://loremflickr.com/800/1000/lamp,interior",
+    fallback: "images/product-3.jpg",
   },
   {
     id: "table",
@@ -41,7 +44,8 @@ const products = [
     material: "Дымчатый дуб",
     price: "124 000 ₽",
     category: "Столы",
-    image: "https://loremflickr.com/800/1000/oak-table",
+    image: "https://loremflickr.com/800/1000/wooden,table",
+    fallback: "images/product-4.jpg",
   },
   {
     id: "sideboard",
@@ -49,7 +53,8 @@ const products = [
     material: "Дуб, натуральное масло",
     price: "96 000 ₽",
     category: "Хранение",
-    image: "https://loremflickr.com/800/1000/wooden-sideboard",
+    image: "https://loremflickr.com/800/1000/wooden,cabinet",
+    fallback: "images/product-5.jpg",
   },
   {
     id: "rug",
@@ -57,40 +62,14 @@ const products = [
     material: "Шерсть ручной работы",
     price: "54 000 ₽",
     category: "Текстиль",
-    image: "https://loremflickr.com/800/1000/wool-rug",
+    image: "https://loremflickr.com/800/1000/wool,rug",
+    fallback: "images/product-6.jpg",
   },
 ];
 
-const collections = [
-  {
-    title: "Гостиная",
-    count: "18 предметов",
-    image: "images/living.jpg",
-    note: "Шерсть · дуб · лён",
-    width: 840,
-    height: 534,
-  },
-  {
-    title: "Столовая",
-    count: "12 предметов",
-    image: "images/dining.jpg",
-    note: "Дуб · керамика",
-    width: 300,
-    height: 300,
-  },
-  {
-    title: "Свет",
-    count: "9 предметов",
-    image: "images/lighting.jpg",
-    note: "Латунь · стекло",
-    width: 440,
-    height: 266,
-  },
-];
-
-const handleImageError = ({ currentTarget }) => {
+const handleImageError = ({ currentTarget }, fallback) => {
   currentTarget.onerror = null;
-  currentTarget.src = "https://picsum.photos/800/1000";
+  currentTarget.src = fallback;
 };
 
 export default function Home() {
@@ -134,9 +113,6 @@ export default function Home() {
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
           <button type="button" onClick={() => scrollTo("catalog")}>
             Каталог
-          </button>
-          <button type="button" onClick={() => scrollTo("collections")}>
-            Коллекции
           </button>
           <button type="button" onClick={() => scrollTo("philosophy")}>
             Философия
@@ -218,7 +194,7 @@ export default function Home() {
                     width="800"
                     height="1000"
                     loading="lazy"
-                    onError={handleImageError}
+                    onError={(event) => handleImageError(event, item.fallback)}
                   />
                   <figcaption>
                     <span>{item.category}</span>
@@ -237,38 +213,6 @@ export default function Home() {
                     ) : (
                       <>В&nbsp;корзину <ArrowUpRight size={15} /></>
                     )}
-                  </button>
-                </footer>
-              </article>
-            ))}
-          </section>
-        </section>
-
-        <section id="collections" className="collections-section" aria-labelledby="collections-title">
-          <header className="section-heading split">
-            <p className="eyebrow">Редакция NORDIC</p>
-            <h2 id="collections-title">Коллекции для тихой жизни</h2>
-            <p>Отобранные предметы объединены материалом, пропорцией и&nbsp;светом.</p>
-          </header>
-          <section className="collection-grid" aria-label="Категории мебели">
-            {collections.map((collection, index) => (
-              <article className={index === 1 ? "collection-card is-raised" : "collection-card"} key={collection.title}>
-                <figure>
-                  <img
-                    src={collection.image}
-                    alt={collection.title}
-                    width={collection.width}
-                    height={collection.height}
-                    loading="lazy"
-                  />
-                  <figcaption>{collection.note}</figcaption>
-                </figure>
-                <footer>
-                  <span>0{index + 1}</span>
-                  <h3>{collection.title}</h3>
-                  <p>{collection.count}</p>
-                  <button type="button" onClick={() => scrollTo("catalog")} aria-label={`Открыть коллекцию «${collection.title}»`}>
-                    <ArrowUpRight size={18} />
                   </button>
                 </footer>
               </article>
@@ -310,7 +254,6 @@ export default function Home() {
           <section>
             <h3>Каталог</h3>
             <button type="button" onClick={() => scrollTo("catalog")}>Предметы</button>
-            <button type="button" onClick={() => scrollTo("collections")}>Коллекции</button>
           </section>
           <section>
             <h3>О&nbsp;нас</h3>
