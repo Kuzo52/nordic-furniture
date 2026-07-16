@@ -532,36 +532,6 @@ img {
   transform: scale(0.97);
 }
 
-.material-strip {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  border-bottom: 1px solid var(--line);
-  background: var(--linen);
-}
-
-.material-strip p {
-  display: flex;
-  min-height: 4.5rem;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 0;
-  padding: 0 1.25rem;
-  border-right: 1px solid var(--line);
-  border-top: 1px solid var(--line);
-  font-size: 0.7rem;
-  letter-spacing: 0.035em;
-}
-
-.material-strip p:nth-child(2n) {
-  border-right: 0;
-}
-
-.material-strip span {
-  color: var(--sage);
-  font-size: 0.58rem;
-  font-weight: 700;
-}
-
 .catalog-section,
 .philosophy-section {
   padding: 2.5rem 1.25rem;
@@ -978,24 +948,6 @@ img {
     max-width: none;
     align-items: flex-end;
     flex-direction: row;
-  }
-
-  .material-strip {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  .material-strip p {
-    min-height: 5.5rem;
-    padding: 0 3rem;
-    border-top: 0;
-  }
-
-  .material-strip p:nth-child(2n) {
-    border-right: 1px solid var(--line);
-  }
-
-  .material-strip p:last-child {
-    border-right: 0;
   }
 
   .catalog-section,

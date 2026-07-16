@@ -6,24 +6,6 @@ import SafeImage from "./components/SafeImage";
 import styles from "./home.module.css";
 import { products } from "../data/products";
 
-const categories = [
-  {
-    key: "living",
-    title: "Гостиная",
-    note: "Кресла, диваны и хранение",
-  },
-  {
-    key: "dining",
-    title: "Столовая",
-    note: "Столы и стулья",
-  },
-  {
-    key: "lighting",
-    title: "Свет",
-    note: "Подвесные и настольные лампы",
-  },
-];
-
 export default function Home() {
   return (
     <main id="home">
@@ -50,79 +32,16 @@ export default function Home() {
         </article>
       </section>
 
-      <section className="material-strip" aria-label="Ключевые свойства коллекции">
-        <p><span>01</span>Северный дуб</p>
-        <p><span>02</span>Натуральная шерсть</p>
-        <p><span>03</span>Ручная отделка</p>
-        <p><span>04</span>Гарантия 10 лет</p>
-      </section>
-
-      <Reveal className={styles.editorial} aria-labelledby="editorial-title">
-        <figure className={styles.editorialVisual}>
-          <SafeImage
-            src="https://loremflickr.com/1800/1200/scandinavian-interior"
-            alt="Светлая гостиная со скандинавской мебелью"
-            width="1800"
-            height="1200"
-          />
-          <figcaption>Дом у&nbsp;воды · Стокгольм</figcaption>
-        </figure>
-        <article className={styles.editorialCopy}>
-          <p className="eyebrow">Интерьер недели · 01</p>
-          <h2 id="editorial-title">Комната, в&nbsp;которой легко остаться.</h2>
-          <p>
-            Тёплый дуб, шерсть и&nbsp;мягкий свет создают спокойный ритм без
-            лишних предметов.
-          </p>
-          <nav aria-label="Предметы из интерьера">
-            {products.slice(0, 2).map((product) => (
-              <Link key={product.id} href={`/product/${product.slug}/`}>
-                <span>{product.brand}</span>
-                <strong>{product.name}</strong>
-                <ArrowRight size={18} />
-              </Link>
-            ))}
-          </nav>
-        </article>
-      </Reveal>
-
-      <Reveal className={styles.categories} aria-labelledby="categories-title">
-        <header className={styles.sectionIntro}>
-          <p className="eyebrow">По пространствам</p>
-          <h2 id="categories-title">Начните с&nbsp;комнаты</h2>
-          <p>
-            Три коротких маршрута по&nbsp;коллекции — от&nbsp;образа
-            к&nbsp;конкретному предмету.
-          </p>
-        </header>
-        <section className={styles.categoryGrid} aria-label="Категории каталога">
-          {categories.map((category, index) => (
-            <Link
-              key={category.key}
-              href={`/catalog/?category=${category.key}`}
-              className={styles.categoryCard}
-            >
-              <article>
-                <span>0{index + 1}</span>
-                <strong>{category.title}</strong>
-                <small>{category.note}</small>
-                <ArrowRight size={20} />
-              </article>
-            </Link>
-          ))}
-        </section>
-      </Reveal>
-
       <Reveal className="catalog-section" aria-labelledby="catalog-title">
         <header className="section-heading">
-          <p className="eyebrow">Выбор редакции · 2026</p>
-          <h2 id="catalog-title">Предметы с&nbsp;долгой жизнью</h2>
+          <p className="eyebrow">Каталог · 2026</p>
+          <h2 id="catalog-title">Коллекция NORDIC</h2>
           <p>
-            Узнаваемые вещи, которые не&nbsp;зависят от&nbsp;быстрых трендов.
+            Мебель, свет и&nbsp;текстиль для спокойного современного дома.
           </p>
         </header>
-        <section className="product-grid" aria-label="Избранные предметы">
-          {products.slice(0, 3).map((product, index) => (
+        <section className="product-grid" aria-label="Предметы каталога">
+          {products.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
         </section>
@@ -133,17 +52,17 @@ export default function Home() {
         </footer>
       </Reveal>
 
-      <Reveal className={styles.designer} aria-labelledby="designer-title">
+      <Reveal className={styles.founder} aria-labelledby="founder-title">
         <article>
-          <p className="eyebrow">Мастер · 01</p>
-          <h2 id="designer-title">Ханс Вегнер.<br />Форма без срока.</h2>
-          <blockquote>
-            «У стула нет обратной стороны. Он должен быть красив со&nbsp;всех
-            направлений».
+          <p className="eyebrow">Основатель NORDIC</p>
+          <blockquote id="founder-title">
+            «Дом не&nbsp;должен впечатлять. Он должен возвращать вас
+            к&nbsp;себе».
           </blockquote>
-          <Link href="/product/wishbone-chair/">
-            История кресла CH24 <ArrowRight size={18} />
-          </Link>
+          <footer>
+            <strong>Элиас Норден</strong>
+            <span>Копенгаген · 2026</span>
+          </footer>
         </article>
       </Reveal>
 
@@ -163,6 +82,36 @@ export default function Home() {
             <p><strong>02</strong>Разборные соединения и&nbsp;ремонтопригодная конструкция.</p>
             <p><strong>03</strong>Натуральные масла вместо тяжёлых лаков.</p>
           </section>
+        </article>
+      </Reveal>
+
+      <Reveal className={styles.editorial} aria-labelledby="editorial-title">
+        <figure className={styles.editorialVisual}>
+          <SafeImage
+            src="https://loremflickr.com/1800/1200/scandinavian-interior"
+            alt="Светлая гостиная со скандинавской мебелью"
+            width="1800"
+            height="1200"
+            loading="lazy"
+          />
+          <figcaption>Дом у&nbsp;воды · Стокгольм</figcaption>
+        </figure>
+        <article className={styles.editorialCopy}>
+          <p className="eyebrow">Интерьер недели · 01</p>
+          <h2 id="editorial-title">Комната, в&nbsp;которой легко остаться.</h2>
+          <p>
+            Тёплый дуб, шерсть и&nbsp;мягкий свет создают спокойный ритм без
+            лишних предметов.
+          </p>
+          <nav aria-label="Предметы из интерьера">
+            {products.slice(0, 2).map((product) => (
+              <Link key={product.id} href={`/product/${product.slug}/`}>
+                <span>{product.brand}</span>
+                <strong>{product.name}</strong>
+                <ArrowRight size={18} />
+              </Link>
+            ))}
+          </nav>
         </article>
       </Reveal>
 
