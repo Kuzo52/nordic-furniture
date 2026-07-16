@@ -5,6 +5,7 @@ import Reveal from "./components/Reveal";
 import SafeImage from "./components/SafeImage";
 import styles from "./home.module.css";
 import { products } from "../data/products";
+import { assetUrl } from "../lib/assets";
 
 export default function Home() {
   return (
@@ -77,24 +78,28 @@ export default function Home() {
             Дом становится теплее не&nbsp;от&nbsp;количества вещей,
             а&nbsp;от&nbsp;того, как они живут вместе.
           </h2>
-          <section className="philosophy-notes" aria-label="Принципы производства">
-            <p><strong>01</strong>Древесина из&nbsp;лесов с&nbsp;ответственным управлением.</p>
-            <p><strong>02</strong>Разборные соединения и&nbsp;ремонтопригодная конструкция.</p>
-            <p><strong>03</strong>Натуральные масла вместо тяжёлых лаков.</p>
-          </section>
         </article>
       </Reveal>
 
       <Reveal className={styles.editorial} aria-labelledby="editorial-title">
         <figure className={styles.editorialVisual}>
-          <SafeImage
-            src="https://loremflickr.com/1800/1200/scandinavian-interior"
-            alt="Светлая гостиная со скандинавской мебелью"
-            width="1800"
-            height="1200"
-            loading="lazy"
-          />
-          <figcaption>Дом у&nbsp;воды · Стокгольм</figcaption>
+          <section className={styles.editorialPair} aria-label="Кресло CH24 и диван «Аутлайн»">
+            <SafeImage
+              src={assetUrl(products[0].image)}
+              alt={products[0].name}
+              width={products[0].width}
+              height={products[0].height}
+              loading="lazy"
+            />
+            <SafeImage
+              src={assetUrl(products[1].image)}
+              alt={products[1].name}
+              width={products[1].width}
+              height={products[1].height}
+              loading="lazy"
+            />
+          </section>
+          <figcaption>CH24 × Outline · NORDIC edit</figcaption>
         </figure>
         <article className={styles.editorialCopy}>
           <p className="eyebrow">Интерьер недели · 01</p>
