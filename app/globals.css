@@ -66,6 +66,7 @@ img {
   justify-content: flex-end;
   padding: calc(1rem + env(safe-area-inset-top)) 1.25rem 1rem;
   color: var(--charcoal);
+  animation: header-reveal 900ms 1.15s var(--ease) both;
 }
 
 .wordmark {
@@ -391,22 +392,9 @@ img {
   min-height: min(54rem, 100svh);
   overflow: hidden;
   color: var(--charcoal);
-  background:
-    linear-gradient(90deg, transparent 49.9%, rgba(30, 30, 30, 0.06) 50%, transparent 50.1%),
-    radial-gradient(circle at 50% 45%, rgba(74, 93, 78, 0.11), transparent 24rem),
-    var(--linen);
-}
-
-.hero::after {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: min(68vw, 42rem);
-  aspect-ratio: 1;
-  border: 1px solid rgba(74, 93, 78, 0.16);
-  border-radius: 50%;
-  content: "";
-  transform: translate(-50%, -50%);
+  background: linear-gradient(125deg, #f8f4ec 0%, #e6ddcd 48%, #f3eee4 100%);
+  background-size: 180% 180%;
+  animation: background-drift 9s var(--ease) infinite alternate;
 }
 
 .hero-copy {
@@ -417,7 +405,6 @@ img {
   flex-direction: column;
   justify-content: space-between;
   padding: calc(6rem + env(safe-area-inset-top)) 1.25rem calc(2rem + env(safe-area-inset-bottom));
-  animation: rise 1.4s 220ms var(--ease) both;
 }
 
 .hero-kicker {
@@ -427,6 +414,7 @@ img {
   gap: 1rem;
   padding-top: 1rem;
   border-top: 1px solid var(--line);
+  animation: line-reveal 1s 180ms var(--ease) both;
 }
 
 .hero-kicker > span {
@@ -457,6 +445,7 @@ img {
   line-height: 0.74;
   letter-spacing: -0.075em;
   white-space: nowrap;
+  animation: brand-reveal 1.5s 280ms var(--ease) both;
 }
 
 .hero-tagline {
@@ -468,6 +457,7 @@ img {
   letter-spacing: -0.04em;
   line-height: 1.05;
   text-align: right;
+  animation: tagline-reveal 1.1s 820ms var(--ease) both;
 }
 
 .hero-footer {
@@ -477,6 +467,7 @@ img {
   gap: 1.5rem;
   border-top: 1px solid var(--line);
   padding-top: 1.25rem;
+  animation: footer-reveal 1s 1.05s var(--ease) both;
 }
 
 .hero-footer p {
@@ -818,21 +809,50 @@ img {
   font-size: 0.65rem;
 }
 
-@keyframes reveal {
+@keyframes background-drift {
   from {
-    opacity: 0;
-    scale: 1.04;
+    background-position: 0% 50%;
   }
   to {
-    opacity: 1;
-    scale: 1;
+    background-position: 100% 50%;
   }
 }
 
-@keyframes rise {
+@keyframes header-reveal {
   from {
     opacity: 0;
-    transform: translateY(2rem);
+    transform: translateY(-1.25rem);
+  }
+}
+
+@keyframes line-reveal {
+  from {
+    opacity: 0;
+    transform: scaleX(0.82);
+    transform-origin: left;
+  }
+}
+
+@keyframes brand-reveal {
+  from {
+    opacity: 0;
+    filter: blur(12px);
+    letter-spacing: 0.04em;
+    transform: translateY(28%);
+  }
+}
+
+@keyframes tagline-reveal {
+  from {
+    opacity: 0;
+    transform: translateX(-2rem);
+  }
+}
+
+@keyframes footer-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(1.5rem);
   }
 }
 
