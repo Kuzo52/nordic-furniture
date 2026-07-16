@@ -265,27 +265,31 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <figure className="hero-visual">
             <img
-              src="images/hero.jpg"
-              alt="Светлая гостиная с деревянной мебелью и льняным текстилем"
-              width="840"
-              height="534"
+              src="images/premium-table.jpg"
+              alt="Столовая Audo Copenhagen со скульптурным столом из дуба и камня"
+              width="1275"
+              height="1700"
               fetchPriority="high"
             />
+            <figcaption>
+              <span>Audo Copenhagen</span>
+              <span>Androgyne · 2026</span>
+            </figcaption>
           </figure>
           <aside className="hero-edition" aria-label="Сведения о коллекции">
-            <span>Edition 01</span>
-            <strong>48</strong>
-            <small>предметов</small>
+            <span>Редакция 01</span>
+            <strong>06</strong>
+            <small>икон дизайна</small>
           </aside>
           <article className="hero-copy">
-            <p className="eyebrow">Стокгольм · Москва</p>
+            <p className="eyebrow">Копенгаген · Стокгольм</p>
             <h1 id="hero-title">
               NORDIC.
-              <span>Форма следует за&nbsp;природой.</span>
+              <span>Тишина, принявшая форму.</span>
             </h1>
             <footer className="hero-footer">
               <p>
-                Честные материалы, спокойные линии и&nbsp;вещи, которые красиво стареют.
+                Иконы северного дизайна, собранные в&nbsp;одной спокойной коллекции.
               </p>
               <button className="primary-button" type="button" onClick={() => scrollTo("catalog")}>
                 Смотреть каталог
