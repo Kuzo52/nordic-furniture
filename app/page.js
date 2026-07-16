@@ -41,20 +41,26 @@ const collections = [
   {
     title: "Гостиная",
     count: "18 предметов",
-    image:
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1200&q=85",
+    image: "images/living.jpg",
+    note: "Шерсть · дуб · лён",
+    width: 840,
+    height: 534,
   },
   {
     title: "Столовая",
     count: "12 предметов",
-    image:
-      "https://images.unsplash.com/photo-1617806118233-18e1de247200?auto=format&fit=crop&w=1200&q=85",
+    image: "images/dining.jpg",
+    note: "Дуб · керамика",
+    width: 300,
+    height: 300,
   },
   {
     title: "Свет",
     count: "9 предметов",
-    image:
-      "https://images.unsplash.com/photo-1540932239986-30128078f3c5?auto=format&fit=crop&w=1200&q=85",
+    image: "images/lighting.jpg",
+    note: "Латунь · стекло",
+    width: 440,
+    height: 266,
   },
 ];
 
@@ -131,13 +137,18 @@ export default function Home() {
         <section className="hero" aria-labelledby="hero-title">
           <figure className="hero-visual">
             <img
-              src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2000&q=90"
+              src="images/hero.jpg"
               alt="Светлая гостиная с деревянной мебелью и льняным текстилем"
-              width="2000"
-              height="1333"
+              width="840"
+              height="534"
               fetchPriority="high"
             />
           </figure>
+          <aside className="hero-edition" aria-label="Сведения о коллекции">
+            <span>Edition 01</span>
+            <strong>48</strong>
+            <small>предметов</small>
+          </aside>
           <article className="hero-copy">
             <p className="eyebrow">Стокгольм · Москва</p>
             <h1 id="hero-title">
@@ -156,6 +167,13 @@ export default function Home() {
           </article>
         </section>
 
+        <section className="material-strip" aria-label="Ключевые свойства коллекции">
+          <p><span>01</span>Северный дуб</p>
+          <p><span>02</span>Натуральная шерсть</p>
+          <p><span>03</span>Ручная отделка</p>
+          <p><span>04</span>Гарантия 10 лет</p>
+        </section>
+
         <section id="scene" className="scene-section" aria-labelledby="scene-title">
           <header className="section-heading">
             <p className="eyebrow">Комната № 01</p>
@@ -165,10 +183,10 @@ export default function Home() {
 
           <figure className="scene">
             <img
-              src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=90"
+              src="images/scene.jpg"
               alt="Гостиная с креслом, дубовым столом и подвесным светильником"
-              width="2000"
-              height="1250"
+              width="840"
+              height="534"
               loading="lazy"
             />
             {hotspots.map((item) => {
@@ -210,6 +228,10 @@ export default function Home() {
                 </article>
               );
             })}
+            <figcaption>
+              <strong>3</strong>
+              <span>предмета<br />в&nbsp;композиции</span>
+            </figcaption>
           </figure>
         </section>
 
@@ -226,10 +248,11 @@ export default function Home() {
                   <img
                     src={collection.image}
                     alt={collection.title}
-                    width="1200"
-                    height="1500"
+                    width={collection.width}
+                    height={collection.height}
                     loading="lazy"
                   />
+                  <figcaption>{collection.note}</figcaption>
                 </figure>
                 <footer>
                   <span>0{index + 1}</span>
