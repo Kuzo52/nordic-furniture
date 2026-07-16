@@ -18,10 +18,6 @@ export const products = [
     description:
       "Лёгкое кресло с характерной Y-образной спинкой. Паровая гибка дерева и ручное плетение делают каждый экземпляр немного разным.",
     care: "Протирать сухой мягкой тканью. Раз в год обновлять поверхность маслом для дуба.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/scandinavian-chair",
-      "https://loremflickr.com/1050/1400/oak-chair",
-    ],
   },
   {
     id: "sofa",
@@ -42,10 +38,6 @@ export const products = [
     description:
       "Архитектурный силуэт с глубоким мягким сиденьем. Тонкая рама сохраняет визуальную лёгкость даже в небольшом пространстве.",
     care: "Регулярно очищать мягкой насадкой пылесоса. Свежие пятна промакивать без трения.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/scandinavian-sofa",
-      "https://loremflickr.com/1050/1400/minimal-living-room",
-    ],
   },
   {
     id: "light",
@@ -66,10 +58,6 @@ export const products = [
     description:
       "Система отражающих плафонов даёт мягкий свет без бликов. Скульптурная форма одинаково выразительна во включённом и выключенном состоянии.",
     care: "Отключить питание и протирать сухой салфеткой. Не использовать абразивные средства.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/pendant-light",
-      "https://loremflickr.com/1050/1400/danish-lighting",
-    ],
   },
   {
     id: "table",
@@ -90,10 +78,6 @@ export const products = [
     description:
       "Монументальная столешница и точное столярное основание соединяют мягкую пластику с почти архитектурной строгостью.",
     care: "Использовать подставки под горячее. Удалять влагу сразу, поверхность обновлять натуральным маслом.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/oak-dining-table",
-      "https://loremflickr.com/1050/1400/scandinavian-dining",
-    ],
   },
   {
     id: "sideboard",
@@ -114,10 +98,6 @@ export const products = [
     description:
       "Модульная система хранения с точной геометрией и долговечной конструкцией. Конфигурацию можно расширять и перестраивать.",
     care: "Протирать влажной микрофиброй, затем насухо. Не применять растворители.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/modern-sideboard",
-      "https://loremflickr.com/1050/1400/minimal-storage",
-    ],
   },
   {
     id: "rug",
@@ -138,10 +118,6 @@ export const products = [
     description:
       "Плотный шерстяной ворс приглушённого серого оттенка собирает интерьер и смягчает акустику комнаты.",
     care: "Пылесосить без вращающейся щётки. Профессиональная сухая чистка по мере необходимости.",
-    gallery: [
-      "https://loremflickr.com/1400/1050/wool-rug",
-      "https://loremflickr.com/1050/1400/scandinavian-rug",
-    ],
   },
 ];
 

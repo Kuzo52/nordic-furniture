@@ -55,17 +55,6 @@ export default async function ProductPage({ params }) {
               height={product.height}
             />
           </figure>
-          {product.gallery.map((image, index) => (
-            <figure key={image}>
-              <SafeImage
-                src={image}
-                alt={`${product.name}: ${index === 0 ? "в интерьере" : "деталь"}`}
-                width={index === 0 ? 1400 : 1050}
-                height={index === 0 ? 1050 : 1400}
-                loading="lazy"
-              />
-            </figure>
-          ))}
         </section>
 
         <article className={styles.summary}>
