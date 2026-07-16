@@ -1,8 +1,9 @@
 "use client";
 
-import { SlidersHorizontal, X } from "lucide-react";
+import { ShoppingBag, SlidersHorizontal, X } from "lucide-react";
 import { useEffect, useMemo, useState } from "react";
 import ProductCard from "../components/ProductCard";
+import { useStore } from "../components/StoreProvider";
 import { products } from "../../data/products";
 import styles from "./catalog.module.css";
 
@@ -16,6 +17,7 @@ const categories = [
 const materials = ["Все", ...new Set(products.map((item) => item.materialGroup))];
 
 export default function CatalogClient() {
+  const { count, setCartOpen } = useStore();
   const [category, setCategory] = useState("all");
   const [material, setMaterial] = useState("Все");
   const [sort, setSort] = useState("editorial");
@@ -137,6 +139,16 @@ export default function CatalogClient() {
               <button type="button" onClick={reset}>Показать всё</button>
             </article>
           )}
+
+          <footer className={styles.cartFooter}>
+            <button type="button" onClick={() => setCartOpen(true)}>
+              <span>
+                <ShoppingBag size={18} />
+                Открыть корзину
+              </span>
+              <strong>{count}</strong>
+            </button>
+          </footer>
         </section>
       </section>
     </>

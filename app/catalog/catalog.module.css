@@ -155,6 +155,48 @@
   background: var(--sage);
 }
 
+.cartFooter {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+
+.cartFooter button {
+  display: flex;
+  width: min(100%, 22rem);
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.1rem;
+  border-radius: 12px;
+  color: var(--linen);
+  background: var(--sage);
+  transition: transform 300ms var(--ease), background 400ms var(--ease);
+}
+
+.cartFooter button:hover {
+  background: #3d4e41;
+}
+
+.cartFooter button span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.cartFooter button strong {
+  display: grid;
+  min-width: 1.8rem;
+  height: 1.8rem;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--charcoal);
+  background: var(--linen);
+  font-size: 0.7rem;
+}
+
 @media (min-width: 768px) {
   .hero {
     grid-template-columns: 1fr 2fr 1fr;
