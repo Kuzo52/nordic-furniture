@@ -10,30 +10,54 @@ import {
 } from "lucide-react";
 import { useEffect, useState } from "react";
 
-const hotspots = [
+const products = [
   {
     id: "chair",
     name: "Кресло Sarek",
     material: "Массив дуба, шерсть",
     price: "89 000 ₽",
-    position: "left-[19%] top-[66%]",
-    tooltip: "left-0 bottom-6 md:left-5 md:bottom-auto md:top-1/2 md:-translate-y-1/2",
+    category: "Кресла",
+    image: "https://loremflickr.com/800/1000/scandinavian-chair",
   },
   {
-    id: "table",
-    name: "Стол Runa",
-    material: "Дымчатый дуб",
-    price: "124 000 ₽",
-    position: "left-[50%] top-[71%]",
-    tooltip: "left-1/2 bottom-6 -translate-x-1/2 md:left-5 md:bottom-auto md:top-1/2 md:translate-x-0 md:-translate-y-1/2",
+    id: "sofa",
+    name: "Диван Fjord",
+    material: "Лён, пух, ясень",
+    price: "198 000 ₽",
+    category: "Диваны",
+    image: "https://loremflickr.com/800/1000/scandinavian-sofa",
   },
   {
     id: "light",
     name: "Светильник Lysa",
     material: "Матовая латунь",
     price: "42 000 ₽",
-    position: "right-[18%] top-[25%]",
-    tooltip: "right-0 top-6 md:right-5 md:top-1/2 md:-translate-y-1/2",
+    category: "Свет",
+    image: "https://loremflickr.com/800/1000/pendant-lamp",
+  },
+  {
+    id: "table",
+    name: "Стол Runa",
+    material: "Дымчатый дуб",
+    price: "124 000 ₽",
+    category: "Столы",
+    image: "https://loremflickr.com/800/1000/oak-table",
+  },
+  {
+    id: "sideboard",
+    name: "Комод Skog",
+    material: "Дуб, натуральное масло",
+    price: "96 000 ₽",
+    category: "Хранение",
+    image: "https://loremflickr.com/800/1000/wooden-sideboard",
+  },
+  {
+    id: "rug",
+    name: "Ковёр Mossa",
+    material: "Шерсть ручной работы",
+    price: "54 000 ₽",
+    category: "Текстиль",
+    image: "https://loremflickr.com/800/1000/wool-rug",
   },
 ];
 
@@ -64,8 +88,12 @@ const collections = [
   },
 ];
 
+const handleImageError = ({ currentTarget }) => {
+  currentTarget.onerror = null;
+  currentTarget.src = "https://picsum.photos/800/1000";
+};
+
 export default function Home() {
-  const [activeHotspot, setActiveHotspot] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [addedItem, setAddedItem] = useState(null);
@@ -73,7 +101,6 @@ export default function Home() {
   useEffect(() => {
     const closeOnEscape = (event) => {
       if (event.key === "Escape") {
-        setActiveHotspot(null);
         setMenuOpen(false);
       }
     };
@@ -105,8 +132,8 @@ export default function Home() {
         </button>
 
         <nav className={menuOpen ? "main-nav is-open" : "main-nav"} aria-label="Основная навигация">
-          <button type="button" onClick={() => scrollTo("scene")}>
-            Интерьер
+          <button type="button" onClick={() => scrollTo("catalog")}>
+            Каталог
           </button>
           <button type="button" onClick={() => scrollTo("collections")}>
             Коллекции
@@ -159,8 +186,8 @@ export default function Home() {
               <p>
                 Честные материалы, спокойные линии и&nbsp;вещи, которые красиво стареют.
               </p>
-              <button className="primary-button" type="button" onClick={() => scrollTo("scene")}>
-                Смотреть интерьер
+              <button className="primary-button" type="button" onClick={() => scrollTo("catalog")}>
+                Смотреть каталог
                 <ArrowDownRight size={18} />
               </button>
             </footer>
@@ -174,65 +201,47 @@ export default function Home() {
           <p><span>04</span>Гарантия 10 лет</p>
         </section>
 
-        <section id="scene" className="scene-section" aria-labelledby="scene-title">
+        <section id="catalog" className="catalog-section" aria-labelledby="catalog-title">
           <header className="section-heading">
-            <p className="eyebrow">Комната № 01</p>
-            <h2 id="scene-title">Соберите пространство</h2>
-            <p>Нажмите на&nbsp;метку, чтобы узнать о&nbsp;предмете.</p>
+            <p className="eyebrow">Каталог · 2026</p>
+            <h2 id="catalog-title">Предметы спокойного дома</h2>
+            <p>Мебель и&nbsp;свет из&nbsp;натуральных материалов — без визуального шума.</p>
           </header>
 
-          <figure className="scene">
-            <img
-              src="images/scene.jpg"
-              alt="Гостиная с креслом, дубовым столом и подвесным светильником"
-              width="840"
-              height="534"
-              loading="lazy"
-            />
-            {hotspots.map((item) => {
-              const isActive = activeHotspot === item.id;
-              return (
-                <article
-                  className={`hotspot ${item.position}`}
-                  key={item.id}
-                  onMouseEnter={() => setActiveHotspot(item.id)}
-                  onMouseLeave={() => setActiveHotspot(null)}
-                >
-                  <button
-                    className="hotspot-trigger"
-                    type="button"
-                    aria-label={`Показать ${item.name}`}
-                    aria-expanded={isActive}
-                    onClick={() => setActiveHotspot(isActive ? null : item.id)}
-                  >
-                    <span />
+          <section className="product-grid" aria-label="Предметы мебели">
+            {products.map((item, index) => (
+              <article className="product-card" key={item.id}>
+                <figure>
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    width="800"
+                    height="1000"
+                    loading="lazy"
+                    onError={handleImageError}
+                  />
+                  <figcaption>
+                    <span>{item.category}</span>
+                    <small>0{index + 1}</small>
+                  </figcaption>
+                </figure>
+                <header>
+                  <p>{item.material}</p>
+                  <h3>{item.name}</h3>
+                </header>
+                <footer>
+                  <strong>{item.price}</strong>
+                  <button type="button" onClick={() => addToCart(item)}>
+                    {addedItem === item.id ? (
+                      <>Добавлено <Check size={15} /></>
+                    ) : (
+                      <>В&nbsp;корзину <ArrowUpRight size={15} /></>
+                    )}
                   </button>
-                  <aside className={`product-tooltip ${item.tooltip} ${isActive ? "is-visible" : ""}`}>
-                    <header>
-                      <p>{item.material}</p>
-                      <h3>{item.name}</h3>
-                    </header>
-                    <strong>{item.price}</strong>
-                    <button type="button" onClick={() => addToCart(item)}>
-                      {addedItem === item.id ? (
-                        <>
-                          Добавлено <Check size={15} />
-                        </>
-                      ) : (
-                        <>
-                          В&nbsp;корзину <ArrowUpRight size={15} />
-                        </>
-                      )}
-                    </button>
-                  </aside>
-                </article>
-              );
-            })}
-            <figcaption>
-              <strong>3</strong>
-              <span>предмета<br />в&nbsp;композиции</span>
-            </figcaption>
-          </figure>
+                </footer>
+              </article>
+            ))}
+          </section>
         </section>
 
         <section id="collections" className="collections-section" aria-labelledby="collections-title">
@@ -258,7 +267,7 @@ export default function Home() {
                   <span>0{index + 1}</span>
                   <h3>{collection.title}</h3>
                   <p>{collection.count}</p>
-                  <button type="button" onClick={() => scrollTo("scene")} aria-label={`Открыть коллекцию «${collection.title}»`}>
+                  <button type="button" onClick={() => scrollTo("catalog")} aria-label={`Открыть коллекцию «${collection.title}»`}>
                     <ArrowUpRight size={18} />
                   </button>
                 </footer>
@@ -300,7 +309,7 @@ export default function Home() {
         <nav aria-label="Карта сайта">
           <section>
             <h3>Каталог</h3>
-            <button type="button" onClick={() => scrollTo("scene")}>Интерьер</button>
+            <button type="button" onClick={() => scrollTo("catalog")}>Предметы</button>
             <button type="button" onClick={() => scrollTo("collections")}>Коллекции</button>
           </section>
           <section>
