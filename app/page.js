@@ -3,7 +3,6 @@
 import {
   ArrowDownRight,
   ArrowUpRight,
-  Check,
   Menu,
   Minus,
   Plus,
@@ -88,7 +87,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
-  const [addedItem, setAddedItem] = useState(null);
   const cartCount = cartItems.reduce((total, item) => total + item.quantity, 0);
   const cartTotal = cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -123,9 +121,6 @@ export default function Home() {
           )
         : [...current, { ...item, quantity: 1 }];
     });
-    setAddedItem(item.id);
-    setCartOpen(true);
-    window.setTimeout(() => setAddedItem(null), 1600);
   };
 
   const updateQuantity = (id, change) => {
@@ -315,37 +310,49 @@ export default function Home() {
           </header>
 
           <section className="product-grid" aria-label="Предметы мебели">
-            {products.map((item, index) => (
-              <article className="product-card" key={item.id}>
-                <figure>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    width={item.width}
-                    height={item.height}
-                    loading="lazy"
-                  />
-                  <figcaption>
-                    <span>{item.category}</span>
-                    <small>0{index + 1}</small>
-                  </figcaption>
-                </figure>
-                <header>
-                  <p>{item.brand} · {item.material}</p>
-                  <h3>{item.name}</h3>
-                </header>
-                <footer>
-                  <strong>{formatPrice(item.price)}</strong>
-                  <button type="button" onClick={() => addToCart(item)}>
-                    {addedItem === item.id ? (
-                      <>Добавлено <Check size={15} /></>
+            {products.map((item, index) => {
+              const cartItem = cartItems.find(({ id }) => id === item.id);
+              return (
+                <article className="product-card" key={item.id}>
+                  <figure>
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      width={item.width}
+                      height={item.height}
+                      loading="lazy"
+                    />
+                    <figcaption>
+                      <span>{item.category}</span>
+                      <small>0{index + 1}</small>
+                    </figcaption>
+                  </figure>
+                  <header>
+                    <p>{item.brand} · {item.material}</p>
+                    <h3>{item.name}</h3>
+                  </header>
+                  <footer>
+                    <strong>{formatPrice(item.price)}</strong>
+                    {cartItem ? (
+                      <section className="product-cart-control" aria-label={`${item.name} в корзине`}>
+                        <span>В&nbsp;корзине</span>
+                        <button type="button" onClick={() => updateQuantity(item.id, -1)} aria-label="Уменьшить количество">
+                          <Minus size={14} />
+                        </button>
+                        <strong>{cartItem.quantity}</strong>
+                        <button type="button" onClick={() => updateQuantity(item.id, 1)} aria-label="Увеличить количество">
+                          <Plus size={14} />
+                        </button>
+                      </section>
                     ) : (
-                      <>В&nbsp;корзину <ArrowUpRight size={15} /></>
+                      <button type="button" onClick={() => addToCart(item)}>
+                        В&nbsp;корзину <ArrowUpRight size={15} />
+                      </button>
                     )}
-                  </button>
-                </footer>
-              </article>
-            ))}
+                  </footer>
+                </article>
+              );
+            })}
           </section>
         </section>
 

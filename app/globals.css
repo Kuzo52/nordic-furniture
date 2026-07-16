@@ -137,9 +137,8 @@ img {
   inset: 0;
   visibility: hidden;
   opacity: 0;
-  background: rgba(30, 30, 30, 0.42);
-  backdrop-filter: blur(4px);
-  transition: visibility 450ms, opacity 450ms var(--ease);
+  background: rgba(30, 30, 30, 0.22);
+  transition: visibility 600ms, opacity 600ms var(--ease);
 }
 
 .cart-backdrop.is-visible {
@@ -150,19 +149,22 @@ img {
 .cart-drawer {
   position: fixed;
   z-index: 90;
-  top: 0;
-  right: 0;
+  top: calc(0.75rem + env(safe-area-inset-top));
+  left: 0;
   display: grid;
-  width: min(100%, 30rem);
-  height: 100dvh;
+  width: min(88vw, 24rem);
+  height: min(42rem, calc(100dvh - 1.5rem - env(safe-area-inset-top) - env(safe-area-inset-bottom)));
   grid-template-rows: auto 1fr auto;
-  padding: calc(1.25rem + env(safe-area-inset-top)) 1.25rem calc(1rem + env(safe-area-inset-bottom));
+  padding: 1.25rem 1.25rem calc(1rem + env(safe-area-inset-bottom));
+  border: 1px solid rgba(30, 30, 30, 0.1);
+  border-left: 0;
+  border-radius: 0 20px 20px 0;
   visibility: hidden;
   color: var(--charcoal);
   background: var(--linen);
-  box-shadow: -2rem 0 5rem rgba(18, 20, 18, 0.18);
-  transform: translateX(100%);
-  transition: visibility 500ms, transform 500ms var(--ease);
+  box-shadow: 2rem 0 5rem rgba(18, 20, 18, 0.16);
+  transform: translateX(-105%);
+  transition: visibility 650ms, transform 650ms var(--ease);
 }
 
 .cart-drawer.is-open {
@@ -667,6 +669,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 0.8rem;
   padding-top: 0.8rem;
@@ -678,7 +681,7 @@ img {
   font-weight: 600;
 }
 
-.product-card > footer button {
+.product-card > footer > button {
   display: inline-flex;
   min-height: 2.25rem;
   align-items: center;
@@ -691,8 +694,45 @@ img {
   transition: transform 300ms var(--ease), background 350ms var(--ease);
 }
 
-.product-card > footer button:hover {
+.product-card > footer > button:hover {
   background: #3d4e41;
+}
+
+.product-cart-control {
+  display: grid;
+  width: 100%;
+  min-height: 2.4rem;
+  grid-template-columns: 1fr 2.2rem auto 2.2rem;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--sage);
+  border-radius: 12px;
+  color: var(--sage);
+}
+
+.product-cart-control > span {
+  padding-left: 0.75rem;
+  font-size: 0.64rem;
+}
+
+.product-cart-control > strong {
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.product-cart-control > button {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  border-radius: 0;
+  color: var(--sage);
+  background: transparent;
+  transition: color 300ms var(--ease), background 300ms var(--ease), transform 300ms var(--ease);
+}
+
+.product-cart-control > button:hover {
+  color: var(--linen);
+  background: var(--sage);
 }
 
 .philosophy-section {
@@ -819,10 +859,11 @@ img {
 
   .cart-drawer {
     top: auto;
-    right: 1rem;
+    right: auto;
+    left: 1rem;
     bottom: 1rem;
-    height: min(46rem, calc(100dvh - 2rem));
-    border: 1px solid rgba(30, 30, 30, 0.1);
+    height: min(42rem, calc(100dvh - 2rem));
+    border-left: 1px solid rgba(30, 30, 30, 0.1);
     border-radius: 24px;
   }
 
