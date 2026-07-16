@@ -16,7 +16,7 @@ import { useEffect, useState } from "react";
 const products = [
   {
     id: "chair",
-    name: "CH24 Wishbone",
+    name: "Кресло «Вишбон CH24»",
     brand: "Carl Hansen & Søn",
     material: "Дуб, плетёный бумажный шнур",
     price: 118000,
@@ -28,7 +28,7 @@ const products = [
   },
   {
     id: "sofa",
-    name: "Outline Sofa",
+    name: "Диван «Аутлайн»",
     brand: "Muuto",
     material: "Шерсть Divina, алюминий",
     price: 349000,
@@ -40,7 +40,7 @@ const products = [
   },
   {
     id: "light",
-    name: "PH 5 Pendant",
+    name: "Светильник «PH 5»",
     brand: "Louis Poulsen",
     material: "Формованный алюминий",
     price: 112000,
@@ -52,7 +52,7 @@ const products = [
   },
   {
     id: "table",
-    name: "Androgyne Dining",
+    name: "Стол «Андрогин»",
     brand: "Audo Copenhagen",
     material: "Маслёный дуб, камень",
     price: 390000,
@@ -63,7 +63,7 @@ const products = [
   },
   {
     id: "sideboard",
-    name: "Haller M51",
+    name: "Комод «Халлер M51»",
     brand: "USM",
     material: "Сталь, хромированные трубы",
     price: 218000,
@@ -75,7 +75,7 @@ const products = [
   },
   {
     id: "rug",
-    name: "Park Gray",
+    name: "Ковёр «Парк Грей»",
     brand: "Nordic Knots",
     material: "Новозеландская шерсть",
     price: 165000,
@@ -128,6 +128,7 @@ export default function Home() {
         : [...current, { ...item, quantity: 1 }];
     });
     setAddedItem(item.id);
+    setCartOpen(true);
     window.setTimeout(() => setAddedItem(null), 1600);
   };
 

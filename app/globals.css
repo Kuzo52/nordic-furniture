@@ -823,6 +823,15 @@ img {
     padding: calc(1.5rem + env(safe-area-inset-top)) 3rem 1.5rem;
   }
 
+  .cart-drawer {
+    top: auto;
+    right: 1rem;
+    bottom: 1rem;
+    height: min(46rem, calc(100dvh - 2rem));
+    border: 1px solid rgba(30, 30, 30, 0.1);
+    border-radius: 24px;
+  }
+
   .hero-copy {
     padding: 8rem 3rem 3rem;
   }
